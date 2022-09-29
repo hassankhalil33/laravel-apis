@@ -56,17 +56,19 @@ class MyController extends Controller {
     function placeValue($num) {
         $arr = [];
         $myStr = strval($num);
-        $length = count($myStr);
+        $length = strlen($myStr);
+        $index = 0;
 
         for ($i = $length - 1; $i > 0; $i--) {
-            foreach (str_split($myStr) as $n) {
-
-            }
+            $arr[] = str_split($myStr)[$index] . str_repeat("0", $i);
+            $index++;
         }
+
+        $arr[] = str_split($myStr)[array_key_last(str_split($myStr))];
 
         return response() -> json([
             "status" => "Success",
-            "message" => $sortedString
+            "message" => $arr
         ]);
     }
 }
