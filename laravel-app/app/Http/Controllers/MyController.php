@@ -52,4 +52,21 @@ class MyController extends Controller {
             "message" => $sortedString
         ]);
     }
+
+    function placeValue($num) {
+        $arr = [];
+        $myStr = strval($num);
+        $length = count($myStr);
+
+        for ($i = $length - 1; $i > 0; $i--) {
+            foreach (str_split($myStr) as $n) {
+
+            }
+        }
+
+        return response() -> json([
+            "status" => "Success",
+            "message" => $sortedString
+        ]);
+    }
 }
