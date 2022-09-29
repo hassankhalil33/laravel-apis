@@ -47,6 +47,9 @@ class MyController extends Controller {
             $sortedString .= $num;
         }
 
-        return $sortedString;
+        return response() -> json([
+            "status" => "Success",
+            "message" => $sortedString
+        ]);
     }
 }
