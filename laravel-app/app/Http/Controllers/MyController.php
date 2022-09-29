@@ -54,8 +54,15 @@ class MyController extends Controller {
         ]);
     }
 
+    // ASSUMED INPUT IS INTEGER 
     function placeValue(Request $request) {
         $num = $request -> input("num");
+        $positive = true;
+        if ($num < 0) {
+            $positive = false;
+            $num *= -1;
+        }
+
         $arr = [];
         $myStr = strval($num);
         $length = strlen($myStr);
@@ -63,16 +70,27 @@ class MyController extends Controller {
 
         for ($i = $length - 1; $i > 0; $i--) {
             if (str_split($myStr)[$index] == "0") {
-                $arr[] = str_split($myStr)[$index];
+                if (!$positive) {
+                    $arr[] = intval("-" . str_split($myStr)[$index]);
+                } else {
+                    $arr[] = intval(str_split($myStr)[$index]);
+                }
             } else {
-                $arr[] = str_split($myStr)[$index] . str_repeat("0", $i);
+                if (!$positive) {
+                    $arr[] = intval("-" . str_split($myStr)[$index] . str_repeat("0", $i));
+                } else {
+                    $arr[] = intval(str_split($myStr)[$index] . str_repeat("0", $i));
+                }
             }
-
             $index++;
         }
 
-        $arr[] = str_split($myStr)[array_key_last(str_split($myStr))];
-
+        if (!$positive) {
+            $arr[] = intval("-" . str_split($myStr)[array_key_last(str_split($myStr))]);
+        } else {
+            $arr[] = intval(str_split($myStr)[array_key_last(str_split($myStr))]);
+        }
+        
         return response() -> json([
             "status" => "Success",
             "message" => $arr
