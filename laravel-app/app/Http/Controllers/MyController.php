@@ -60,7 +60,12 @@ class MyController extends Controller {
         $index = 0;
 
         for ($i = $length - 1; $i > 0; $i--) {
-            $arr[] = str_split($myStr)[$index] . str_repeat("0", $i);
+            if (str_split($myStr)[$index] == "0") {
+                $arr[] = str_split($myStr)[$index];
+            } else {
+                $arr[] = str_split($myStr)[$index] . str_repeat("0", $i);
+            }
+            
             $index++;
         }
 
