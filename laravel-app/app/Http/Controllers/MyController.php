@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class MyController extends Controller {
     
-    function sortedString($myStr) {
+    function sortedString(Request $request) {
+        $myStr = $request -> input("string");
         $arrSmall = [];
         $arrCap = [];
         $arrNum = [];
@@ -53,7 +54,8 @@ class MyController extends Controller {
         ]);
     }
 
-    function placeValue($num) {
+    function placeValue(Request $request) {
+        $num = $request -> input("num");
         $arr = [];
         $myStr = strval($num);
         $length = strlen($myStr);
@@ -65,7 +67,7 @@ class MyController extends Controller {
             } else {
                 $arr[] = str_split($myStr)[$index] . str_repeat("0", $i);
             }
-            
+
             $index++;
         }
 
