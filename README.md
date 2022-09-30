@@ -1,4 +1,4 @@
 # laravel-apis
 
 <h1>Requirements</h1>
-<img src="https://ibb.co/s3FJffR" alt="requirements_image">
+<img src="https://i.ibb.co/VBvp119/Screenshot-1.png" alt="requirements_image">
