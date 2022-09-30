@@ -96,4 +96,13 @@ class MyController extends Controller {
             "message" => $arr
         ]);
     }
+
+    function toComputerCode(Request $request) {
+        $myStr = $request -> input("string");
+
+        return response() -> json([
+            "status" => "Success",
+            "message" => $myStr
+        ]);
+    }
 }
