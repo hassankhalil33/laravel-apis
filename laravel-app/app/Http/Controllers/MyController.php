@@ -115,12 +115,60 @@ class MyController extends Controller {
     }
 
     function evaluatePrefixExpression(Request $request) {
-        $myExp = $request -> input("expression");
+        $input = $request -> input("expression");
+        $myExp = explode(" ", $input);
+        $operands = ["+", "-", "*", "/"];
+        $stackOp = [];
+        $stackNum = [];
+        $i = 0;
+        $total = 0;
 
+        foreach ($myExp as $d) {
+            if (in_array($d, $operands)) {
+                $stackOp[] = $d;
+                $i = 0;
+            } else {
+                $stackNum[] = $d;
+                $i++;
+            }
+
+            if ($i == 2) {
+                $last = array_pop($stackNum);
+                $first = array_pop($stackNum);
+                $operation = array_pop($stackOp);
+
+                if ($operation == "+") {
+                    $total = ((int)$first + (int)$last);
+                } else if ($operation == "-") {
+                    $total = ((int)$first - (int)$last);
+                } else if ($operation == "*") {
+                    $total = ((int)$first * (int)$last);
+                } else {
+                    $total = ((int)$first / (int)$last);
+                }
+
+                $i = 0;
+            }
+        }
+
+        while ($stackNum) {
+            $num = array_pop($stackNum);
+            $operation = array_pop($stackOp);
+
+            if ($operation == "+") {
+                $total += (int)$num;
+            } else if ($operation == "-") {
+                $total -= (int)$num;
+            } else if ($operation == "*") {
+                $total *= (int)$num;
+            } else {
+                $total /= (int)$num;
+            }
+        }
 
         return response() -> json([
             "status" => "Success",
-            "message" => $myExp
+            "message" => $total
         ]);
     }
 }
