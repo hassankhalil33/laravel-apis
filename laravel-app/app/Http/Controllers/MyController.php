@@ -13,6 +13,18 @@ class MyController extends Controller {
         $arrNum = [];
         $sortedString = "";
 
+        function mySort($arr) {
+            for ($i = 0; $i < count($arr); $i++) {
+                for ($j = 1; $j <= count($arr) - 1; $j++) {
+                    if ($arr[$j - 1] > $arr[$j]) {
+                        [$arr[$j - 1], $arr[$j]] = [$arr[$j], $arr[$j - 1]]; 
+                        echo json_encode($arr);
+                    }
+                }
+            }
+            return $arr;
+        }
+
         foreach (str_split($myStr) as $l) {
             if ($l >= "A" and $l <= "Z") {
                 $arrCap[] = $l;
@@ -23,9 +35,9 @@ class MyController extends Controller {
             }
         }
 
-        sort($arrSmall);
-        sort($arrCap);
-        sort($arrNum);
+        $arrSmall = mySort($arrSmall);
+        $arrCap = mySort($arrCap);
+        $arrNum = mySort($arrNum);
 
         for ($i = 0; $i < count($arrSmall); $i++) {
             if ($arrCap) {
