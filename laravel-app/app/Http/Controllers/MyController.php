@@ -99,10 +99,18 @@ class MyController extends Controller {
 
     function toComputerCode(Request $request) {
         $myStr = $request -> input("string");
+        $regExp = "/[0-9]+/";
+        $finalString = "";
+
+        $finalString = preg_replace_callback($regExp, function ($matches) {
+            foreach ($matches as $match) {
+                return decbin($match);
+            }
+        }, $myStr);
 
         return response() -> json([
             "status" => "Success",
-            "message" => $myStr
+            "message" => $finalString
         ]);
     }
 }
