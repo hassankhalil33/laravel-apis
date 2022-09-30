@@ -17,8 +17,7 @@ class MyController extends Controller {
             for ($i = 0; $i < count($arr); $i++) {
                 for ($j = 1; $j <= count($arr) - 1; $j++) {
                     if ($arr[$j - 1] > $arr[$j]) {
-                        [$arr[$j - 1], $arr[$j]] = [$arr[$j], $arr[$j - 1]]; 
-                        echo json_encode($arr);
+                        [$arr[$j - 1], $arr[$j]] = [$arr[$j], $arr[$j - 1]];
                     }
                 }
             }
