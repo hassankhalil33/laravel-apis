@@ -115,11 +115,12 @@ class MyController extends Controller {
     }
 
     function evaluatePrefixExpression(Request $request) {
-        
+        $myExp = $request -> input("expression");
+
 
         return response() -> json([
             "status" => "Success",
-            "message" => $finalString
+            "message" => $myExp
         ]);
     }
 }
