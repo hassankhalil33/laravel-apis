@@ -113,4 +113,13 @@ class MyController extends Controller {
             "message" => $finalString
         ]);
     }
+
+    function evaluatePrefixExpression(Request $request) {
+        
+
+        return response() -> json([
+            "status" => "Success",
+            "message" => $finalString
+        ]);
+    }
 }
